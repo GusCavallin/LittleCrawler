@@ -1,0 +1,5 @@
+# Text files are stored with LF in the repository and checked out with the platform's line endings.
+* text=auto
+
+# Windows batch files need CRLF in every checkout.
+*.bat text eol=crlf

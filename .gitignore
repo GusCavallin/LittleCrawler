@@ -1,0 +1,28 @@
+# Compiled classes and the run/output directories.
+*.class
+/classes/
+/test_classes/
+/out/
+
+# Local IDE state.
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Local copies of the crawler configuration (personal paths and hosts).
+*.bk
+*.bk[0-9]*
+*.local.properties
+
+# Third-party textbook example ('Thinking in Java', (c) Bruce Eckel); not ours to publish.
+/src/producerconsumer/
+
+# Crawler and thread-pool logs, OS junk, editor backups.
+*.log
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*~

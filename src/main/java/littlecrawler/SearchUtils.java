@@ -176,20 +176,6 @@ public class SearchUtils
 //        }
 //    }
 
-    private static String arrayToString(String[] array)
-    {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[");
-        for (int i = 0; i < array.length; i++) {
-            if (i != 0) {
-                sb.append(", ");
-            }
-            sb.append(array[i]);
-        }
-        sb.append("]");
-        return sb.toString();
-    }
-
     public static int countSlashes(URL urlBeingSearched)
     {
         int i = 0;
@@ -201,38 +187,7 @@ public class SearchUtils
         return i;
     }
 
-    public static void main(String[] args)
-    {
-        try {
-            System.out.println("*** Search Utils Test ***");
-            String[] list = {
-            "http://www.utdallas.edu/index.htm",
-            "http://www.utdallas.edu/",
-            "http://www.utdallas.edu",
-            "http://www.utdallas.edu/~undrwd/index.htm",
-            "http://www.utdallas.edu/~undrwd/",
-            "http://www.utdallas.edu/~undrwd",
-            "http://www.utdallas.edu:4040/index.htm",
-            "http://www.utdallas.edu:4040/",
-            "http://www.utdallas.edu:4040",
-            "http://www.utdallas.edu:4040/~undrwd/index.htm",
-            "http://www.utdallas.edu:4040/~undrwd/",
-            "http://www.utdallas.edu:4040/~undrwd"};
-
-            System.out.println("List: " + arrayToString(list));
-
-            for(String element: list) {
-                System.out.print("Element: " + element);
-                System.out.print("\t  URL Path: " + SearchUtils.getURLPath(element));
-                System.out.print("\t  / count: " + countSlashes(new URL(element)));
-                System.out.println();
-            }
-
-            System.out.println("*** Search Utils Test COMPLETE ***");
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-    }
+    // The manual check that used to be here (a main method that printed results) is now SearchUtilsTest.
 
 //    static final String HTTP_ = "http:";
 //    static final String HTTPS_ = "https:";

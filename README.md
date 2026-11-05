@@ -18,7 +18,7 @@ It was written between 2007 and 2012 as a personal tool and freshened up in 2026
 - Java 21 or later (last checked with 21 and 26)
 - Maven 3.9 or later, to build
 
-The program has no dependencies beyond the JDK. The main class is still called `WebCrawlerApplet` because it began as an applet. It is now a plain Swing panel shown in a window, since the Applet API was removed in JDK 26.
+The program has no dependencies beyond the JDK; JUnit is used only by the tests. The main class is still called `WebCrawlerApplet` because it began as an applet. It is now a plain Swing panel shown in a window, since the Applet API was removed in JDK 26.
 
 ## Build and run
 
@@ -42,6 +42,12 @@ Or run it straight from the sources, without building the jar:
 
 ```bash
 mvn compile exec:java
+```
+
+`mvn clean package` also runs the tests. To run only the tests:
+
+```bash
+mvn test
 ```
 
 In the window, fill in the starting location, the path to stay within and the destination folder, then press **Download**. **Show Detailed Status** reports the link counts and the state of each worker, and **Stop** ends the run.
@@ -69,7 +75,7 @@ To keep one configuration per site, copy the file inside `config/` under a name 
 
 - It does not read `robots.txt` and does not pause between requests. With the default of 50 threads it can put real load on a site. Lower the thread count and crawl only sites you are allowed to copy.
 - Links are found by scanning the text of the page, not by parsing HTML, so links built by JavaScript are missed and some odd markup is misread.
-- There are no automated tests, so the build's test step reports zero tests. `threadpool.ThreadPoolTest` and `threadtimer.TimerTest`, under `src/test/java`, and `SearchUtils.main` are manual checks that you start yourself.
+- The automated tests cover only the URL helpers (`SearchUtilsTest`, 40 tests, no network access). Nothing tests the crawl itself or the thread pool. `threadpool.ThreadPoolTest` and `threadtimer.TimerTest`, under `src/test/java`, are manual programs that you start yourself; the build does not run them.
 
 ## Layout
 
@@ -77,7 +83,7 @@ To keep one configuration per site, copy the file inside `config/` under a name 
 | --- | --- |
 | `pom.xml` | Maven build |
 | `src/main/java` | The program |
-| `src/test/java` | Manual test programs |
+| `src/test/java` | JUnit tests, and two manual test programs |
 | `config/` | Settings, read from disk when the program starts |
 | `LittleCrawler.bat` | Starts the built program on Windows |
 | `start/` | A sample local starting page |

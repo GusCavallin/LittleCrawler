@@ -28,8 +28,9 @@ Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 Prepared for publication: builds with Maven, runs on current Java versions, and the configuration is read from a file at start-up. Requires Java 21 or later.
 
 ### Added
-- Maven build (`pom.xml`). `mvn clean package` produces a runnable `target/littlecrawler-<version>.jar` (`java -jar`), built for Java 21. The project has no dependencies.
+- Maven build (`pom.xml`). `mvn clean package` produces a runnable `target/littlecrawler-<version>.jar` (`java -jar`), built for Java 21. The program has no dependencies; JUnit is used only by the tests.
 - `mvn compile exec:java` runs the program from the sources.
+- 40 JUnit 5 tests (`mvn test`) in `SearchUtilsTest`, for the URL helpers. They replace the `main` method that `SearchUtils` had since 2007, which printed its results for a person to read, and they use `example.com` in place of the original host. No test opens a connection.
 - `README.md`, `LICENSE` (PolyForm Noncommercial License 1.0.0), `.gitignore` and `.gitattributes`.
 - An optional command-line argument: the path of the properties file to use.
 - When the properties file is missing, the program prints a warning and starts with the built-in defaults.

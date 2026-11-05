@@ -53,8 +53,9 @@ the method and the judgement calls, so the history can be checked or redone.
 - **No archives for 4.0, 4.5 or 4.9.** The author's notes for version 4 are
   covered under 4.1 and those for 4.5 under 4.7. 4.9 is the difference
   between the 4.7 archive and the code as it stood before the 2026 changes.
-- **The `VERSION` constant still reads v4.7**, although the version log
-  below it describes 4.9. The changelog follows the log.
+- **The `VERSION` constant stayed at v4.7 through 4.9**, although the
+  version log below it describes 4.9. The changelog follows the log. The
+  constant was set to v5.0 with the 2026 changes.
 - **`LittleCrawler.rar`** holds the same `WebCrawler.java` as the 0.0
   archive. Only the IDE workspace file differs, so it isn't a version.
 - **1.0 comes almost two years after 0.2.** Class headers in 1.0 are dated
@@ -73,8 +74,9 @@ the method and the judgement calls, so the history can be checked or redone.
   changes are left out.
 - **IDE files and compiled classes** in the archives were ignored. 4.7 is
   the first archive with an `.idea` folder.
-- **The 2026 entry is labelled Unreleased** because no version number has
-  been chosen for it.
+- **5.0 is the 2026 work.** It has no archive: it is the set of changes made
+  on 2026-11-05 to prepare the code for publication, which the author
+  numbered 5.0.
 - Items marked *(likely)* in the changelog are inferences, not certainties.
 
 ## Redoing it

@@ -1,5 +1,6 @@
 # Compiled classes and the run/output directories.
 *.class
+/target/
 /classes/
 /test_classes/
 /out/
@@ -17,7 +18,7 @@
 *.local.properties
 
 # Third-party textbook example ('Thinking in Java', (c) Bruce Eckel); not ours to publish.
-/src/producerconsumer/
+/src/test/java/producerconsumer/
 
 # Crawler and thread-pool logs, OS junk, editor backups.
 *.log

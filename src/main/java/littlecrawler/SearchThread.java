@@ -368,7 +368,7 @@ public class SearchThread
     }
 
     private static final int NO_TIMEOUT = -1;
-    protected static final String VERSION = "v4.7"; // Date: 2012/07/02
+    protected static final String VERSION = "v5.0"; // Date: 2026/11/05
     /* VERSION LOG:
      * * Changes for Version 4:
      * In this version I addressed the issue with Workers trying to execute other workers (which was creating a deadlock).
@@ -385,5 +385,7 @@ public class SearchThread
      * Properties print fixed.
      * Search limit property added.
      * Already downloaded files print one log message only. Subsequent messages are ignored.
+     * * Changes for Version 5.0:
+     * Prepared for publication. From this version on, the changes are listed in CHANGELOG.md.
      */
 }

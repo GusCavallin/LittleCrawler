@@ -2,7 +2,7 @@
 
 A small multi-threaded site downloader with a Swing interface, written in plain Java with no dependencies. It starts from a URL (or a local HTML file), follows the links that stay inside the paths you allow, and saves the pages and the files they reference to a local folder.
 
-It was written between 2007 and 2012 as a personal tool and is published as it was left. It is not maintained. [CHANGELOG.md](CHANGELOG.md) has the version history.
+It was written between 2007 and 2012 as a personal tool and freshened up in 2026 for publication: it now builds with Maven, runs on current Java, and a handful of old bugs are fixed. It is not maintained. [CHANGELOG.md](CHANGELOG.md) has the version history.
 
 ## What it does
 
@@ -15,29 +15,34 @@ It was written between 2007 and 2012 as a personal tool and is published as it w
 
 ## Requirements
 
-A JDK, version 8 or later. It was last checked with JDK 8, 21 and 26.
+- Java 21 or later (last checked with 21 and 26)
+- Maven 3.9 or later, to build
 
-The main class is still called `WebCrawlerApplet` because it began as an applet. It is now a plain Swing panel shown in a window, since the Applet API was removed in JDK 26.
+The program has no dependencies beyond the JDK. The main class is still called `WebCrawlerApplet` because it began as an applet. It is now a plain Swing panel shown in a window, since the Applet API was removed in JDK 26.
 
 ## Build and run
 
-From the project root:
-
 ```bash
-javac -d classes -sourcepath src src/littlecrawler/WebCrawlerApplet.java
+mvn clean package
 ```
 
 ```bash
-java -cp classes littlecrawler.WebCrawlerApplet
+java -jar target/littlecrawler-5.0.jar
 ```
 
-This reads `config/webCrawler.properties`, relative to the directory you run it from. To use another file, pass its path as the only argument:
+Run it from the project folder, so it finds `config/webCrawler.properties`. To use another file, pass its path as the only argument:
 
 ```bash
-java -cp classes littlecrawler.WebCrawlerApplet config/my-site.local.properties
+java -jar target/littlecrawler-5.0.jar config/my-site.local.properties
 ```
 
-On Windows, `bin/downloader.bat` runs the same class from an `out` folder beside `classes`, so downloads land there; create that folder first.
+On Windows, after building once, you can also double-click `LittleCrawler.bat`. It starts the program without a console window, from any folder, and explains what's wrong if Java 21+ or the jar is missing. It uses `JAVA_HOME` if set, otherwise the `java` on your PATH. It runs the program from an `out` folder, which it creates if needed, so the downloads and logs land there unless a destination folder is set. It takes the path of another properties file as an optional argument.
+
+Or run it straight from the sources, without building the jar:
+
+```bash
+mvn compile exec:java
+```
 
 In the window, fill in the starting location, the path to stay within and the destination folder, then press **Download**. **Show Detailed Status** reports the link counts and the state of each worker, and **Stop** ends the run.
 
@@ -64,7 +69,19 @@ To keep one configuration per site, copy the file inside `config/` under a name 
 
 - It does not read `robots.txt` and does not pause between requests. With the default of 50 threads it can put real load on a site. Lower the thread count and crawl only sites you are allowed to copy.
 - Links are found by scanning the text of the page, not by parsing HTML, so links built by JavaScript are missed and some odd markup is misread.
-- There are no automated tests. `threadpool.ThreadPoolTest`, `threadtimer.TimerTest` and `SearchUtils.main` are manual checks.
+- There are no automated tests, so the build's test step reports zero tests. `threadpool.ThreadPoolTest` and `threadtimer.TimerTest`, under `src/test/java`, and `SearchUtils.main` are manual checks that you start yourself.
+
+## Layout
+
+| Path | What it holds |
+| --- | --- |
+| `pom.xml` | Maven build |
+| `src/main/java` | The program |
+| `src/test/java` | Manual test programs |
+| `config/` | Settings, read from disk when the program starts |
+| `LittleCrawler.bat` | Starts the built program on Windows |
+| `start/` | A sample local starting page |
+| `docs/` | Notes on how the changelog was built |
 
 ## Third-party material
 

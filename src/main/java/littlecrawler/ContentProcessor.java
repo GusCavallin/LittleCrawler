@@ -23,7 +23,6 @@ public abstract class ContentProcessor
     private File tempFile; // Temporary file sometimes is null. In that case it must be deleted.
     private File targetFile;
     private List<URL> resourcesList;
-    private boolean downloadRelatedImages;
 //    private Map<String, Closeable> threadResources;
 
     public ContentProcessor(final URL url, final SearchThread searchThread, final Log log)

@@ -3,7 +3,7 @@ title: LittleCrawler Changelog
 author: Gustavo Cavallin
 co-authored-by: Claude Fable 5.1 <noreply@anthropic.com>
 created: 2026-11-05
-covers: 0.0 (2007-08-31) to 4.9 (2012-07-10), plus the unreleased changes of 2026-11-05
+covers: 0.0 (2007-08-31) to 5.0 (2026-11-05)
 sources: .Zips version archives, the VERSION constant and the author's version log
 ---
 
@@ -24,18 +24,22 @@ and judgement calls.
 
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
-## [Unreleased] - 2026-11-05
-Prepared for publication: runs on current Java versions, and the configuration is read from a file at start-up.
+## [5.0] - 2026-11-05
+Prepared for publication: builds with Maven, runs on current Java versions, and the configuration is read from a file at start-up. Requires Java 21 or later.
 
 ### Added
+- Maven build (`pom.xml`). `mvn clean package` produces a runnable `target/littlecrawler-<version>.jar` (`java -jar`), built for Java 21. The project has no dependencies.
+- `mvn compile exec:java` runs the program from the sources.
 - `README.md`, `LICENSE` (PolyForm Noncommercial License 1.0.0), `.gitignore` and `.gitattributes`.
 - An optional command-line argument: the path of the properties file to use.
 - When the properties file is missing, the program prints a warning and starts with the built-in defaults.
 
 ### Changed
 - The configuration moved from `src/littlecrawler/webCrawler.properties`, loaded from the classpath, to `config/webCrawler.properties`, read from disk each time the program starts. A change no longer needs a copy or a rebuild.
+- Sources moved to Maven's layout: the program to `src/main/java`, and the manual test programs (`ThreadPoolTest`, `TimerTest`) to `src/test/java`.
+- The `VERSION` constant, shown in the start message and the status dialog, is v5.0. It had stayed at v4.7 through 4.9.
 - `WebCrawlerApplet` extends `JPanel` instead of `JApplet`, because the Applet API was removed in JDK 26. The class name and the window are unchanged.
-- `bin/downloader.bat` passes `../config/webCrawler.properties`.
+- `bin/downloader.bat` became `LittleCrawler.bat` in the project folder. It starts the built jar, can be double-clicked or run from any folder, checks for Java 21+ and for the jar, creates the `out` folder, starts the program without a console window, and takes an optional properties file path.
 - The shipped configuration is a neutral example: proxy off, `example.com` as the starting location.
 
 ### Fixed
@@ -51,7 +55,7 @@ Prepared for publication: runs on current Java versions, and the configuration i
 - The `producerconsumer` textbook example is kept out of the repository.
 
 ## [4.9] - 2012-07-10
-Search limit setting and quieter logs. *(No archive; taken from the code and the author's version log. The `VERSION` constant still reads v4.7.)*
+Search limit setting and quieter logs. *(No archive; taken from the code and the author's version log. The `VERSION` constant was left at v4.7.)*
 
 ### Added
 - `webCrawler.enableSearchLimit` and `webCrawler.searchLimit` (default 1,000,000). The limit is off unless enabled; before, it was always on at 1,000,000 pages.

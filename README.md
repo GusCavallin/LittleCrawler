@@ -13,6 +13,12 @@ It was written between 2007 and 2012 as a personal tool and freshened up in 2026
 - Runs the downloads on a fixed pool of worker threads, each with a timeout.
 - Writes a `crawler_*.log` and a `ThreadPool_*.log` in the destination folder.
 
+## How it works
+
+![Diagram of the classes: the window starts SearchThread, which gives one job per page to the ThreadPool; a ThreadPoolWorker runs the job, which downloads and saves the page and its files and sends the new page links back to SearchThread.](docs/class-diagram.svg)
+
+Follow the numbers in the diagram. **Download** starts `SearchThread` (1), which keeps the list of URLs still to search. For each URL it gives a `LinkProcessor` job to the `ThreadPool` (2), and the pool hands the job to an idle `ThreadPoolWorker` (3). The worker runs the job on its own thread (4). The job downloads the page, saves it, and downloads the files the page links to (5). The page links that stay inside the allowed paths go back to `SearchThread` (6), which repeats from step 2 until no link is left.
+
 ## Requirements
 
 - Java 21 or later (last checked with 21 and 26)
@@ -87,7 +93,7 @@ To keep one configuration per site, copy the file inside `config/` under a name 
 | `config/` | Settings, read from disk when the program starts |
 | `LittleCrawler.bat` | Starts the built program on Windows |
 | `start/` | A sample local starting page |
-| `docs/` | Notes on how the changelog was built |
+| `docs/` | The class diagram, and notes on how the changelog was built |
 
 ## Third-party material
 
